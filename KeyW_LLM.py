@@ -157,20 +157,35 @@ class ESRSTableExtractor:
             response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": "You are an ESRS disclosure analyzer."},
-                    {"role": "user", "content": f"""Analyze this text from page {page_num + 1} and extract ESRS disclosures.
+                    {"role": "system", "content": """You are an ESRS disclosure analyzer. 
+                    You should identify all ESRS disclosures including:
+                    - Environmental (E1-1 to E5-7)
+                    - Social (S1-1 to S4-7)
+                    - Governance (G1-1 to G2-10)
+                    Be thorough and identify ALL unique disclosure codes."""},
+                    {"role": "user", "content": f"""Analyze this text from page {page_num + 1} and extract ALL ESRS disclosures.
                     Return a JSON object with this exact structure:
                     {{
                         "items": [
                             {{
                                 "disclosure_code": "E1-1",
-                                "topic": "Climate change",
-                                "page": 169,
+                                "topic": "Climate change mitigation",
+                                "page": {page_num + 1},
                                 "assurance_level": "Limited"
-                            }}
+                            }},
+                            {{
+                                "disclosure_code": "E1-2", 
+                                "topic": "Climate change adaptation",
+                                "page": {page_num + 1},
+                                "assurance_level": "Limited"
+                            }},
+                            ... (include ALL found disclosures)
                         ]
                     }}
-                    Only include items that match ESRS disclosure patterns like E1-1, S2-1, etc."""}
+                    Include ALL items that match ESRS disclosure patterns like:
+                    - Environmental: E1-1 through E5-7
+                    - Social: S1-1 through S4-7
+                    - Governance: G1-1 through G2-10"""}
                 ],
                 response_format={"type": "json_object"}
             )
@@ -189,9 +204,23 @@ class ESRSTableExtractor:
 
 # Example usage
 if __name__ == "__main__":
-    extractor = ESRSTableExtractor()
-    results_df = extractor.extract_from_directory("./annual_reports")
-    print(results_df.head())
+    try:
+        extractor = ESRSTableExtractor()
+        
+        # Check if directory exists
+        if not os.path.exists("./annual_reports"):
+            logging.error("Directory './annual_reports' not found")
+            exit(1)
+            
+        results_df = extractor.extract_from_directory("./annual_reports")
+        
+        if results_df.empty:
+            logging.warning("No data was extracted from PDFs")
+        else:
+            print(results_df.head())
+            
+    except Exception as e:
+        logging.error(f"Error during execution: {str(e)}")
 
 {
     "version": "0.2.0",
