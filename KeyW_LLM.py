@@ -10,11 +10,14 @@ import json  # Add at top with other imports
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
 class ESRSTableExtractor:
-    def __init__(self, model_name="gpt-3.5-turbo"):  # Changed from gpt-4
-        self.client = OpenAI()
-        self.model = model_name
-        self._verify_model_access()
-    
+    def __init__(self, api_key=None, base_url=None):
+        """Initialize with optional API key and base URL for proxy"""
+        self.client = OpenAI(
+            api_key=api_key or os.getenv('OPENAI_API_KEY'),
+            base_url=base_url or os.getenv('OPENAI_BASE_URL')
+        )
+        self.setup_logging()
+
     def _verify_model_access(self):
         """Verify access to the specified model"""
         try:
@@ -51,7 +54,7 @@ class ESRSTableExtractor:
                     logging.error(f"Error processing {filename}: {str(e)}")
         
         # Create DataFrame only if results were found
-        if all_results:
+        if (all_results):
             results_df = pd.DataFrame(all_results)
             results_df.to_csv(output_file, index=False)
             return results_df
@@ -157,35 +160,17 @@ class ESRSTableExtractor:
             response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": """You are an ESRS disclosure analyzer. 
-                    You should identify all ESRS disclosures including:
-                    - Environmental (E1-1 to E5-7)
-                    - Social (S1-1 to S4-7)
-                    - Governance (G1-1 to G2-10)
-                    Be thorough and identify ALL unique disclosure codes."""},
-                    {"role": "user", "content": f"""Analyze this text from page {page_num + 1} and extract ALL ESRS disclosures.
-                    Return a JSON object with this exact structure:
-                    {{
-                        "items": [
-                            {{
-                                "disclosure_code": "E1-1",
-                                "topic": "Climate change mitigation",
-                                "page": {page_num + 1},
-                                "assurance_level": "Limited"
-                            }},
-                            {{
-                                "disclosure_code": "E1-2", 
-                                "topic": "Climate change adaptation",
-                                "page": {page_num + 1},
-                                "assurance_level": "Limited"
-                            }},
-                            ... (include ALL found disclosures)
-                        ]
-                    }}
-                    Include ALL items that match ESRS disclosure patterns like:
-                    - Environmental: E1-1 through E5-7
-                    - Social: S1-1 through S4-7
-                    - Governance: G1-1 through G2-10"""}
+                    {
+                        "role": "system",
+                        "content": """You are an ESRS disclosure analyzer. Extract ALL disclosures including:
+                        - Environmental (E1-1 to E5-7)
+                        - Social (S1-1 to S4-7) 
+                        - Governance (G1-1 to G2-10)"""
+                    },
+                    {
+                        "role": "user",
+                        "content": f"Analyze this text from page {page_num + 1} and extract ALL ESRS disclosures."
+                    }
                 ],
                 response_format={"type": "json_object"}
             )
