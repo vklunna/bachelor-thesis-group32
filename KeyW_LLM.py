@@ -4,7 +4,11 @@ from PyPDF2 import PdfReader
 import re
 import logging
 from openai import OpenAI
-import json  # Add at top with other imports
+import json
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv(override=True)
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -12,29 +16,47 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 class ESRSTableExtractor:
     def __init__(self, api_key=None, base_url=None):
         """Initialize with optional API key and base URL for proxy"""
+        # Get API key from environment or parameter
+        self.api_key = api_key or os.getenv('OPENAI_API_KEY')
+        if not self.api_key:
+            raise ValueError("OpenAI API key not found. Set OPENAI_API_KEY environment variable or pass key to constructor.")
+            
+        self.model = "gpt-3.5-turbo"
+        self.logger = self.setup_logging()
         self.client = OpenAI(
-            api_key=api_key or os.getenv('OPENAI_API_KEY'),
+            api_key=self.api_key,
             base_url=base_url or os.getenv('OPENAI_BASE_URL')
         )
-        self.setup_logging()
+        self._verify_model_access()
+
+    def setup_logging(self):
+        """Configure logging for the extractor"""
+        logger = logging.getLogger(__name__)
+        logger.setLevel(logging.INFO)
+        if not logger.handlers:
+            handler = logging.StreamHandler()
+            formatter = logging.Formatter('%(asctime)s - %(message)s')
+            handler.setFormatter(formatter)
+            logger.addHandler(handler)
+        return logger
 
     def _verify_model_access(self):
         """Verify access to the specified model"""
         try:
-            # Test API connection with a minimal prompt
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": "test"}],
                 max_tokens=5
             )
-            logging.info(f"Successfully connected to model: {self.model}")
+            self.logger.info(f"Successfully connected to model: {self.model}")
+            return True
         except Exception as e:
-            logging.error(f"Error accessing model {self.model}: {str(e)}")
-            # Fall back to GPT-3.5-turbo if GPT-4 is unavailable
+            self.logger.error(f"Error accessing model {self.model}: {str(e)}")
             if self.model == "gpt-4":
-                logging.info("Falling back to gpt-3.5-turbo")
+                self.logger.info("Falling back to gpt-3.5-turbo")
                 self.model = "gpt-3.5-turbo"
-                self._verify_model_access()
+                return self._verify_model_access()
+            return False
     
     def extract_from_directory(self, pdf_directory, output_file="esrs_references.csv"):
         """Process all PDFs in a directory"""
@@ -49,12 +71,15 @@ class ESRSTableExtractor:
                     company_results = self.process_pdf(file_path)
                     if company_results:  # Only add if results were found
                         company_name = os.path.splitext(filename)[0]
+                        # Add company name to each result
+                        for result in company_results:
+                            result['company'] = company_name
                         all_results.extend(company_results)
                 except Exception as e:
                     logging.error(f"Error processing {filename}: {str(e)}")
         
         # Create DataFrame only if results were found
-        if (all_results):
+        if all_results:
             results_df = pd.DataFrame(all_results)
             results_df.to_csv(output_file, index=False)
             return results_df
@@ -73,15 +98,13 @@ class ESRSTableExtractor:
         
         for page_num in potential_pages:
             page_text = self.extract_page_text(pdf_path, page_num)
-
-                    
-            
             
             # Check if this looks like a cross-reference table
             if self.is_likely_esrs_table(page_text):
                 # Extract structured data using LLM
                 page_results = self.extract_with_llm(page_text, page_num)
-                results.extend(page_results)
+                if page_results:
+                    results.extend(page_results)
         
         return results
     
@@ -116,13 +139,10 @@ class ESRSTableExtractor:
             # Check for ESRS code patterns
             has_esrs_codes = bool(esrs_pattern.search(text))
             
-            logging.debug(f"Page {page_num+1}: Found {keyword_matches} keywords, ESRS codes: {has_esrs_codes}")
-            
             # Add page if it has multiple keywords or ESRS codes
             if keyword_matches >= 2 or has_esrs_codes:
                 potential_pages.append(page_num)
                 logging.info(f"Found potential ESRS content on page {page_num+1}")
-                logging.debug(f"Page excerpt: {text[:200]}...")
         
         return potential_pages
     
@@ -133,7 +153,6 @@ class ESRSTableExtractor:
             return reader.pages[page_num].extract_text()
         return ""
 
-    # Loosened logic: if 2+ patterns found, it's likely a table
     def is_likely_esrs_table(self, text):
         """Determine if text likely contains an ESRS reference table"""
         patterns = [
@@ -148,40 +167,66 @@ class ESRSTableExtractor:
             r"ESRS\s+[A-Z0-9\-]+",                             # More general ESRS reference
         ]
 
-    # Count how many of these patterns are found
+        # Count how many of these patterns are found
         matches = sum(bool(re.search(p, text, re.IGNORECASE)) for p in patterns)
 
         return matches >= 2  # Loosened logic: if 2+ patterns found, it's likely a table
-
     
     def extract_with_llm(self, text, page_num):
         """Use LLM to extract structured data from text"""
         try:
+            prompt = f"""
+            You are an ESRS disclosure analyzer. Extract ALL ESRS disclosures from the following text from page {page_num + 1}.
+            Look for all of these disclosure types:
+            - Environmental (E1-1 to E5-7)
+            - Social (S1-1 to S4-7) 
+            - Governance (G1-1 to G2-10)
+            
+            For each disclosure found, extract:
+            1. The disclosure code (e.g., E1-1, S2-3)
+            2. The disclosure title/name
+            3. The page reference if available
+            
+            Return the data in this JSON format:
+            {{
+                "items": [
+                    {{
+                        "code": "E1-1",
+                        "title": "Climate change mitigation policy",
+                        "page_reference": "p. 45"
+                    }},
+                    // more items
+                ]
+            }}
+            
+            Here's the text to analyze:
+            {text}
+            """
+            
             response = self.client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {
-                        "role": "system",
-                        "content": """You are an ESRS disclosure analyzer. Extract ALL disclosures including:
-                        - Environmental (E1-1 to E5-7)
-                        - Social (S1-1 to S4-7) 
-                        - Governance (G1-1 to G2-10)"""
-                    },
-                    {
-                        "role": "user",
-                        "content": f"Analyze this text from page {page_num + 1} and extract ALL ESRS disclosures."
-                    }
-                ],
+                model=self.model,
+                messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"}
             )
             
             result = response.choices[0].message.content
             logging.debug(f"LLM response: {result}")
             
-            return json.loads(result).get("items", [])
+            # Parse JSON response
+            parsed_result = json.loads(result)
+            
+            # Extract the items array
+            items = parsed_result.get("items", [])
+            
+            # Add page number to each item
+            for item in items:
+                item["source_page"] = page_num + 1
+                
+            return items
             
         except json.JSONDecodeError as e:
             logging.error(f"JSON parsing error on page {page_num + 1}: {str(e)}")
+            logging.error(f"Raw response: {result}")
             return []
         except Exception as e:
             logging.error(f"API error on page {page_num + 1}: {str(e)}")
@@ -190,33 +235,18 @@ class ESRSTableExtractor:
 # Example usage
 if __name__ == "__main__":
     try:
+        # Create a .env file with OPENAI_API_KEY=your_api_key or pass it directly
         extractor = ESRSTableExtractor()
         
-        # Check if directory exists
-        if not os.path.exists("./annual_reports"):
-            logging.error("Directory './annual_reports' not found")
-            exit(1)
-            
-        results_df = extractor.extract_from_directory("./annual_reports")
+        # Make sure this directory exists and contains PDF files
+        pdf_dir = "./annual_reports"
+        if not os.path.exists(pdf_dir):
+            os.makedirs(pdf_dir)
+            logging.warning(f"Created directory {pdf_dir}. Please add PDF files to process.")
         
-        if results_df.empty:
-            logging.warning("No data was extracted from PDFs")
-        else:
-            print(results_df.head())
-            
+        results_df = extractor.extract_from_directory(pdf_dir)
+        if not results_df.empty:
+            print(results_df)
+            print(f"Results saved to esrs_references.csv")
     except Exception as e:
         logging.error(f"Error during execution: {str(e)}")
-
-{
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Python: Current File",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "justMyCode": True
-        }
-    ]
-}

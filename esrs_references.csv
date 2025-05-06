@@ -1,39 +1,161 @@
-disclosure_code,topic,page,assurance_level
-E1-1,Climate change mitigation,3,Limited
-E1-2,Climate change adaptation,3,Limited
-E1-1,Climate change mitigation,38,Limited
-E1-2,Climate change adaptation,38,Limited
-E1-1,Climate change mitigation,165,Limited
-E1-2,Climate change adaptation,165,Limited
-E1-1,Climate change mitigation,166,Limited
-E1-2,Climate change adaptation,166,Limited
-E1-1,Climate change mitigation,168,Limited
-E1-2,Climate change adaptation,168,Limited
-E1-1,Climate change mitigation,169,Limited
-E1-2,Climate change adaptation,169,Limited
-E1-1,Climate change mitigation,170,Limited
-E1-2,Climate change adaptation,170,Limited
-E1-1,Climate change mitigation,171,Limited
-E1-2,Climate change adaptation,171,Limited
-E1-1,Climate change mitigation,222,Limited
-E1-2,Climate change adaptation,222,Limited
-E1-1,Climate change mitigation,243,Limited
-E1-2,Climate change adaptation,243,Limited
-E1-1,Climate change mitigation,244,Limited
-E1-2,Climate change adaptation,244,Limited
-E1-1,Climate change mitigation,245,Limited
-E1-2,Climate change adaptation,245,Limited
-E1-1,Climate change mitigation,246,Limited
-E1-2,Climate change adaptation,246,Limited
-E1-1,Climate change mitigation,247,Limited
-E1-2,Climate change adaptation,247,Limited
-E1-1,Climate change mitigation,248,Limited
-E1-2,Climate change adaptation,248,Limited
-E1-1,Climate change mitigation,249,Limited
-E1-2,Climate change adaptation,249,Limited
-E1-1,Climate change mitigation,251,Limited
-E1-2,Climate change adaptation,251,Limited
-E1-1,Climate change mitigation,261,Limited
-E1-2,Climate change adaptation,261,Limited
-E1-1,Climate change mitigation,262,Limited
-E1-2,Climate change adaptation,262,Limited
+code,title,page_reference,source_page,company
+E1-1,Climate change mitigation policy,p. 40,3,PhilipsFullAnnualReport2024-English
+S1-1,Employment creation and retention,p. 46,3,PhilipsFullAnnualReport2024-English
+G1-1,Board profile,p. 48,3,PhilipsFullAnnualReport2024-English
+E1,Climate change (ESRS E1),p. 38,38,PhilipsFullAnnualReport2024-English
+S1,Own workforce (ESRS S1),p. 38,38,PhilipsFullAnnualReport2024-English
+S2,Workers in the value chain (ESRS S2),p. 38,38,PhilipsFullAnnualReport2024-English
+S4,Consumers and end-users (ESRS S4),p. 38,38,PhilipsFullAnnualReport2024-English
+G1,Business conduct (ESRS G1),p. 38,38,PhilipsFullAnnualReport2024-English
+Note I,Climate change,p. 183,165,PhilipsFullAnnualReport2024-English
+Note II,Resource use and circular economy,p. 196,165,PhilipsFullAnnualReport2024-English
+Note III,Other environmental information,p. 205,165,PhilipsFullAnnualReport2024-English
+Note IV,Workforce of the future,p. 216,165,PhilipsFullAnnualReport2024-English
+Note V,"Diversity, Inclusion and Well-Being",p. 218,165,PhilipsFullAnnualReport2024-English
+Note VI,Employee engagement,p. 220,165,PhilipsFullAnnualReport2024-English
+Note VII,Equal opportunities and equal pay,p. 221,165,PhilipsFullAnnualReport2024-English
+Note VIII,Living Wage and Adequate Wage,p. 222,165,PhilipsFullAnnualReport2024-English
+Note IX,Employee volunteering,p. 222,165,PhilipsFullAnnualReport2024-English
+Note X,Building employability,p. 223,165,PhilipsFullAnnualReport2024-English
+Note XI,Health and Safety,p. 223,165,PhilipsFullAnnualReport2024-English
+Note XII,Workforce details,p. 225,165,PhilipsFullAnnualReport2024-English
+Note XIII,Supplier sustainability & Workers in the value chain,p. 228,165,PhilipsFullAnnualReport2024-English
+Note XIV,Human rights,p. 235,165,PhilipsFullAnnualReport2024-English
+Note XV,Measuring health impacts,p. 236,165,PhilipsFullAnnualReport2024-English
+Note XVI,Lives improved,p. 236,165,PhilipsFullAnnualReport2024-English
+Note XVII,Product responsibility and safety,p. 236,165,PhilipsFullAnnualReport2024-English
+Note XVIII,Other social information,p. 236,165,PhilipsFullAnnualReport2024-English
+Note XIX,Philips SpeakUp (Ethics Line),p. 237,165,PhilipsFullAnnualReport2024-English
+Note XX,Advocacy activities and expenses,p. 238,165,PhilipsFullAnnualReport2024-English
+E1-1,Climate change mitigation policy,p. 166,166,PhilipsFullAnnualReport2024-English
+E1-1,Energy efficiency,p. 166,166,PhilipsFullAnnualReport2024-English
+E5-1,Circular Economy,p. 166,166,PhilipsFullAnnualReport2024-English
+E5-2,Waste management,p. 166,166,PhilipsFullAnnualReport2024-English
+G1-1,Superior long-term value for customers and shareholders,p. 168,168,PhilipsFullAnnualReport2024-English
+G1-1,Highest standards of ethics and governance,p. 168,168,PhilipsFullAnnualReport2024-English
+G1-1,General Business Principles as minimum standards,p. 168,168,PhilipsFullAnnualReport2024-English
+G1-1,"Transparent about plans, activities, results, and contributions to society",p. 168,168,PhilipsFullAnnualReport2024-English
+E1-1,Climate change mitigation policy,p. 45,169,PhilipsFullAnnualReport2024-English
+E1-2,Climate resilience assessment,Not specified,169,PhilipsFullAnnualReport2024-English
+G1-1,Basis for preparation,Not specified,169,PhilipsFullAnnualReport2024-English
+ESRS 2 GOV-2,"Information provided to and sustainability matters addressed by the undertaking’s administrative, management and supervisory bodies",p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 GOV-3,Integration of sustainability-related performance in incentive schemes,p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 SBM-3,"Material impacts, risks and opportunities and their interaction with strategy and business model",p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 GOV-2,"Information provided to and sustainability matters addressed by the undertaking’s administrative, management and supervisory bodies",p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 SBM-2,Interests and views of stakeholders,p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 IRO-1,"Description of the processes to identify and assess material impacts, risks and opportunities",p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 MDR-P,Policies adopted to manage material sustainability matters,p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 IRO-1,"Description of the processes to identify and assess material impacts, risks and opportunities",p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 SBM-3,"Material impacts, risks and opportunities and their interaction with strategy and business model",p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 MDR-A,Actions and resources in relation to material sustainability matters,p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 MDR-M,Metrics in relation to material sustainability matters,p. 170,170,PhilipsFullAnnualReport2024-English
+ESRS 2 MDR-T,Tracking effectiveness of policies and actions through targets,p. 170,170,PhilipsFullAnnualReport2024-English
+E1-1,Climate change mitigation policy,p. 45,171,PhilipsFullAnnualReport2024-English
+S1-1,Interests and view of stakeholders,,171,PhilipsFullAnnualReport2024-English
+S1-2,Philips actively engages with stakeholders,,171,PhilipsFullAnnualReport2024-English
+S1-3,"Material impacts, risks, and opportunities and their interaction with strategy and business model",,171,PhilipsFullAnnualReport2024-English
+S1-4,Policies adopted to manage material sustainability matters,,171,PhilipsFullAnnualReport2024-English
+G1-1,External assurance,,171,PhilipsFullAnnualReport2024-English
+G1-2,Double Materiality Assessment,,171,PhilipsFullAnnualReport2024-English
+S1-10,Adequate Wage,p. 222,222,PhilipsFullAnnualReport2024-English
+E5-7,Employee volunteering,p. 222,222,PhilipsFullAnnualReport2024-English
+GOV-1,"ESG governance: Supervisory Board report: composition, diversity and self-evaluation",p. 64,243,PhilipsFullAnnualReport2024-English
+GOV-2,"Environmental, Social and Governance: ESG governance",p. 40,243,PhilipsFullAnnualReport2024-English
+GOV-3,Remuneration Report: Non-financial Annual Incentive,p. 76,243,PhilipsFullAnnualReport2024-English
+GOV-3,Remuneration Report: Long-term Sustainability objectives,p. 80,243,PhilipsFullAnnualReport2024-English
+GOV-4,"SFDR ESG governance, strategy and policies: Governance",p. 170,243,PhilipsFullAnnualReport2024-English
+GOV-5,"Environmental, Social and Governance: ESG governance",p. 58,243,PhilipsFullAnnualReport2024-English
+SBM-1,Governance: Working with stakeholders and advocacy,p. 54,243,PhilipsFullAnnualReport2024-English
+SBM-2,Governance: Working with stakeholders and advocacy,p. 54,243,PhilipsFullAnnualReport2024-English
+SBM-3,Governance: Working with stakeholders and advocacy,p. 54,243,PhilipsFullAnnualReport2024-English
+IRO-1,Sustainability statement: Double Materiality Assessment,p. 171,243,PhilipsFullAnnualReport2024-English
+IRO-2,Sustainability statement: Double Materiality Assessment,p. 171,243,PhilipsFullAnnualReport2024-English
+MDR-P,"ESG governance, strategy and policies: Policies",p. 171,243,PhilipsFullAnnualReport2024-English
+MDR-A,"ESG governance, strategy and policies: Actions",p. 171,243,PhilipsFullAnnualReport2024-English
+MDR-M,Sustainability statement: Tracking our 2025 ESG program,p. 166,243,PhilipsFullAnnualReport2024-English
+MDR-M,Sustainability statement: Double Materiality Assessment,p. 171,243,PhilipsFullAnnualReport2024-English
+MDR-T,Sustainability statement: Tracking our 2025 ESG program,p. 166,243,PhilipsFullAnnualReport2024-English
+MDR-T,Sustainability statement: Double Materiality Assessment,p. 171,243,PhilipsFullAnnualReport2024-English
+E1-1,Transition plan for climate change mitigation,p. 189,244,PhilipsFullAnnualReport2024-English
+E1-2,Policies related to climate change mitigation and adaptation,p. 180,244,PhilipsFullAnnualReport2024-English
+E1-3,Actions and resources in relation to climate change policies,p. 184,244,PhilipsFullAnnualReport2024-English
+E1-4,Targets related to climate change mitigation and adaptation,p. 183,244,PhilipsFullAnnualReport2024-English
+E1-5,Energy consumption and mix,p. 184,244,PhilipsFullAnnualReport2024-English
+E1-6,"Gross Scopes 1, 2, 3 and Total GHG emissions",p. 185,244,PhilipsFullAnnualReport2024-English
+E1-7,GHG removals and GHG mitigation projects financed through carbon credits,p. 187,244,PhilipsFullAnnualReport2024-English
+E1-8,Internal carbon pricing,p. 188,244,PhilipsFullAnnualReport2024-English
+E1-9,Anticipated financial effects from material physical and transition risks and potential climate-related opportunities,P3/BRR,244,PhilipsFullAnnualReport2024-English
+E5-1,Policies related to resource use and circular economy,p. 180,244,PhilipsFullAnnualReport2024-English
+E5-2,Actions and resources related to resource use and circular economy,p. 198,244,PhilipsFullAnnualReport2024-English
+E5-3,Targets related to resource use and circular economy,p. 196,244,PhilipsFullAnnualReport2024-English
+E5-4,Resource inflows,p. 196,244,PhilipsFullAnnualReport2024-English
+E5-5,Resource outflows,p. 196,244,PhilipsFullAnnualReport2024-English
+E5-6,"Anticipated financial effects from resource use and circular economy-related impacts, risks and opportunities","1,2,3",244,PhilipsFullAnnualReport2024-English
+S1-1,Policies related to own workforce,p. 180,245,PhilipsFullAnnualReport2024-English
+S1-2,Processes for engaging with own workers and workers' representatives about impacts,p. 216,245,PhilipsFullAnnualReport2024-English
+S1-3,Processes to remediate negative impacts and channels for own workers to raise concerns,p. 237,245,PhilipsFullAnnualReport2024-English
+S1-4,"Taking action on material impacts on own workforce, and approaches to mitigating material risks and pursuing material opportunities",p. 237,245,PhilipsFullAnnualReport2024-English
+S1-5,"Targets related to managing material negative impacts, advancing positive impacts, and managing material risks and opportunities",p. 166,245,PhilipsFullAnnualReport2024-English
+S1-6,Characteristics of the undertaking’s employees,p. 225,245,PhilipsFullAnnualReport2024-English
+S1-7,Characteristics of non-employee workers in the undertaking's own workforce,p. 225,245,PhilipsFullAnnualReport2024-English
+S1-8,Collective bargaining coverage and social dialogue,p. 227,245,PhilipsFullAnnualReport2024-English
+S1-9,Diversity metrics,p. 218,245,PhilipsFullAnnualReport2024-English
+S1-10,Adequate wages,p. 222,245,PhilipsFullAnnualReport2024-English
+S1-11,Social protection,p. 227,245,PhilipsFullAnnualReport2024-English
+S1-12,Persons with disabilities,p. 218,245,PhilipsFullAnnualReport2024-English
+S1-13,Training and skills development metrics,p. 217,245,PhilipsFullAnnualReport2024-English
+S1-14,Health and safety metrics,p. 223,245,PhilipsFullAnnualReport2024-English
+S1-15,Work-life balance metrics,p. 220,245,PhilipsFullAnnualReport2024-English
+S1-16,Compensation metrics (pay gap and total compensation),p. 221,245,PhilipsFullAnnualReport2024-English
+S1-17,"Incidents, complaints and severe human rights impacts",p. 237,245,PhilipsFullAnnualReport2024-English
+S2-1,Policies related to value chain workers,p. 180,246,PhilipsFullAnnualReport2024-English
+S2-2,Processes for engaging with value chain workers about impacts,p. 234,246,PhilipsFullAnnualReport2024-English
+S2-3,Processes to remediate negative impacts and channels for value chain workers to raise concerns,p. 1,246,PhilipsFullAnnualReport2024-English
+S2-4,"Taking action on material impacts on value chain workers, and approaches to managing material risks and pursuing material opportunities related to value chain workers, and effectiveness of those actions",p. 228,246,PhilipsFullAnnualReport2024-English
+S2-5,"Targets related to managing material negative impacts, advancing positive impacts, and managing material risks and opportunities","p. 2,3",246,PhilipsFullAnnualReport2024-English
+S4-1,Policies related to consumers and end-users,p. 51,247,PhilipsFullAnnualReport2024-English
+S4-2,Processes for engaging with consumers and end-users about impacts,p. 51,247,PhilipsFullAnnualReport2024-English
+S4-3,Processes to remediate negative impacts and channels for consumers and end-users to raise concerns,p. 51,247,PhilipsFullAnnualReport2024-English
+S4-4,"Taking action on material impacts on consumers and end-users, and approaches to managing material risks and pursuing material opportunities related to consumers and end-users, and effectiveness of those actions",p. 50,247,PhilipsFullAnnualReport2024-English
+S4-5,"Targets related to managing material negative impacts, advancing positive impacts, and managing material risks and opportunities",p. 166,247,PhilipsFullAnnualReport2024-English
+G1-1,Corporate culture and Business conduct policies and corporate culture,p. 49,247,PhilipsFullAnnualReport2024-English
+G1-2,Management of relationships with suppliers,p. 48,247,PhilipsFullAnnualReport2024-English
+G1-3,Prevention and detection of corruption and bribery,p. 51,247,PhilipsFullAnnualReport2024-English
+G1-4,Confirmed incidents of corruption or bribery,p. 51,247,PhilipsFullAnnualReport2024-English
+G1-5,Political influence and lobbying activities,p. 238,247,PhilipsFullAnnualReport2024-English
+G1-6,Payment practices,p. 234,247,PhilipsFullAnnualReport2024-English
+E1-2,Resource use and circular economy: Philips Environmental Profit & Loss account and Material Flow reporting methodology,p. 40,248,PhilipsFullAnnualReport2024-English
+E1-4,Resource use and circular economy: EcoDesign,p. 44,248,PhilipsFullAnnualReport2024-English
+E1-5,Resource use and circular economy: Philips methodologies for 2025 circularity targets,p. 44,248,PhilipsFullAnnualReport2024-English
+E1-6,Resource use and circular economy: EcoDesign,p. 44,248,PhilipsFullAnnualReport2024-English
+E1-7,Resource use and circular economy: Philips methodologies for 2025 circularity targets,p. 44,248,PhilipsFullAnnualReport2024-English
+E2-1,Environmental information: EcoHero Revenues and Green Revenues,p. 202,248,PhilipsFullAnnualReport2024-English
+E3-1,Environmental information: Resource use and circular economy: Circular revenues,p. 198,248,PhilipsFullAnnualReport2024-English
+E3-2,"Resource use and circular economy: Policies, metrics and targets",p. 43,248,PhilipsFullAnnualReport2024-English
+E3-3,Resource use and circular economy: Waste,p. 43,248,PhilipsFullAnnualReport2024-English
+E3-4,Resource use and circular economy: Philips methodologies for 2025 circularity targets,p. 43,248,PhilipsFullAnnualReport2024-English
+E4-1,"Resource use and circular economy: Policies, metrics and targets",p. 43,248,PhilipsFullAnnualReport2024-English
+E4-2,Resource use and circular economy: Circular end-of-use management,p. 43,248,PhilipsFullAnnualReport2024-English
+E5-1,"Resource use and circular economy: Policies, metrics and targets",p. 43,248,PhilipsFullAnnualReport2024-English
+E5-2,Resource use and circular economy: Waste,p. 43,248,PhilipsFullAnnualReport2024-English
+E5-3,Resource use and circular economy: Philips methodologies for 2025 circularity targets,p. 43,248,PhilipsFullAnnualReport2024-English
+S4-7,Living Wage and Adequate Wage,p. 45,249,PhilipsFullAnnualReport2024-English
+S4-7,Living Wage and Adequate Wage,p. 45,249,PhilipsFullAnnualReport2024-English
+S4-7,Living Wage and Adequate Wage,p. 45,249,PhilipsFullAnnualReport2024-English
+S3-4,Supplier Sustainability & Workers in the value chain: Governance and Grievance mechanisms,p. 47,249,PhilipsFullAnnualReport2024-English
+S4-7,Supplier Sustainability & Workers in the value chain,p. 48,249,PhilipsFullAnnualReport2024-English
+S3-1,Improving people's lives,p. 46,249,PhilipsFullAnnualReport2024-English
+G2-10,"Patient safety, quality and regulatory",p. 50,249,PhilipsFullAnnualReport2024-English
+G2-10,"Patient safety, quality and regulatory",p. 50,249,PhilipsFullAnnualReport2024-English
+G2-1,Cybersecurity,p. 52,249,PhilipsFullAnnualReport2024-English
+G2-1,General Business Principles (GBP),p. 51,249,PhilipsFullAnnualReport2024-English
+G2-3,Tax contribution,p. 53,249,PhilipsFullAnnualReport2024-English
+G2-3,Working with stakeholders and advocacy,p. 53,249,PhilipsFullAnnualReport2024-English
+S4-7,Sustainability statement,p. 251,251,PhilipsFullAnnualReport2024-English
+E1-1,Climate change mitigation policy,p. 251,251,PhilipsFullAnnualReport2024-English
+S1-6,contingent worker (type of workers),p. 261,261,PhilipsFullAnnualReport2024-English
+S1-6,"employees per segment, employment by consolidation changes, employees per geographic areas in FTE",p. 261,261,PhilipsFullAnnualReport2024-English
+S1-16,pay gap,p. 261,261,PhilipsFullAnnualReport2024-English
+E5-7,"Overall presentation, structure and fundamental qualitative characteristics of information",p. 262,262,PhilipsFullAnnualReport2024-English
+E1-1,Climate change mitigation policy,p. 262,262,PhilipsFullAnnualReport2024-English
+E5-7,"Overall presentation, structure and fundamental qualitative characteristics of information",p. 262,262,PhilipsFullAnnualReport2024-English
