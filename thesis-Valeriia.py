@@ -5,6 +5,7 @@ from collections import defaultdict
 import pandas as pd
 from openai import OpenAI
 #%%
+client = OpenAI(api_key="your api")
 
 keywords=["ersr", "disclosure requirement", "location", "standard section", "index of", "chapter", "section", "page", "page number", "reference to", "reference table", "content index", "ESRS indices"]
 DR_pattern=re.compile(r"\b(?:E|S|G|GOV|BP|SMB|IRO|MDR|ESRS)-\d+\b", re.IGNORECASE)
