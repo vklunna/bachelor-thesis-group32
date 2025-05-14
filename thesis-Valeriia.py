@@ -129,6 +129,12 @@ print(selected_table_text1)
 
 #%%
 #%%
+
+
+
+
+
+
 #Method 2
 
 from openai import OpenAI
