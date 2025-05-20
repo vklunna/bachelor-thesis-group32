@@ -29,16 +29,19 @@ EU_pattern = re.compile(
     r"eu\s+legislation|"
     r"e\.u\.\s+legislation|"
     r"eu\s+taxonomy|"
-    r"eu\s+taxonomy\s+regulation|" 
+    r"eu\s+taxonomy\s+regulation|"
     r"eu\s+regulation|"
     r"sfdr|"
     r"sfdr\s+reference|"
     r"pillar\s+3\s+reference|"
+    r"benchmark\s+regulation\s+reference|"
     r"directive\s+\d+/\d+/EC|"
     r"regulation\s+\(EU\)\s+\d+/\d+|"
     r"due\s+diligence|"
     r"elements\s+of\s+due\s+diligence|"
-    r"law\s+11/2018"
+    r"law\s+11/2018|"
+    r"material\s+impacts|"
+    r"financial\s+materiality"
     r")\b",
     re.IGNORECASE
 )
@@ -76,7 +79,7 @@ def extract_text_and_score_pages(pdf_path):
         eu_penalty = 1 if eu_hits else 0  
 
         #total scoring system. the most weight is to the keyword and eu legislation penalty
-        score = (esrs_count*1.5 +len(unique_esrs) * 1.5 + keyword_count * 5 + (1 if has_table_structure else 0)*0.1 - eu_penalty*15)
+        score = (esrs_count*1.5 +len(unique_esrs) * 1.5 + keyword_count * 5 + (1 if has_table_structure else 0)*0.1 - eu_penalty*5)
 
         results.append({
         "page_num": page_num,
@@ -137,7 +140,7 @@ def get_expanded_page_range(df, pdf_path, esrs_thresh=5, unique_thresh=4):
 
     # Backward neighbours
     high_eu_seen = False
-    for offset in range(1, 6):
+    for offset in range(1, 7):
         i = top_page - offset
         if i < 0:
             break
@@ -150,10 +153,10 @@ def get_expanded_page_range(df, pdf_path, esrs_thresh=5, unique_thresh=4):
                 break
 
             if high_eu_seen:
-                if row['eu_penalty'] > 2:
+                if row['eu_penalty'] > 9:
                     break  #second page after high-EU has too many EU hits -> stop
             else:
-                if row['eu_penalty'] >= 5:
+                if row['eu_penalty'] < 20:
                     high_eu_seen = True  #first high-EU page encountered
 
             final_pages.insert(0, i)
@@ -176,10 +179,10 @@ def get_expanded_page_range(df, pdf_path, esrs_thresh=5, unique_thresh=4):
                 break
 
             if high_eu_seen:
-                if row['eu_penalty'] > 2:
+                if row['eu_penalty'] > 9:
                     break  #second page after high-EU has too many EU hits -> stop
             else:
-                if row['eu_penalty'] >= 5:
+                if row['eu_penalty'] < 20:
                     high_eu_seen = True  #first high-EU page encountered
 
             final_pages.append(i)
@@ -200,7 +203,7 @@ def get_expanded_page_range(df, pdf_path, esrs_thresh=5, unique_thresh=4):
 # %%
 #RUN only this if you already ran the functions
 #prints the top one candidate page where the table might be located
-pdf_path = "Orsted Annual Report 2024.pdf"
+pdf_path = "Stellantis-NV-20241231-Annual-Report.pdf"
 df_result = extract_text_and_score_pages(pdf_path)
 top_page_number = df_result.iloc[0]["page_num"]
 print("Top page number:", top_page_number)
@@ -240,7 +243,7 @@ def show_pdf_page_text(pdf_path, page_number, char_limit=None):
         print(f"📄 Content of page {page_number}:\n")
         print(text)
 
-show_pdf_page_text(pdf_path, 60, char_limit=500)
+show_pdf_page_text(pdf_path, 272, char_limit=500)
 #%%
 #to check with eu penalty keywords were detected
 def count_eu_penalty(pdf_path, page_number, show_matches=False):
@@ -254,7 +257,7 @@ def count_eu_penalty(pdf_path, page_number, show_matches=False):
         if show_matches:
             print("Matched terms:", matches)
 
-count_eu_penalty(pdf_path, 120, show_matches=True)
+count_eu_penalty(pdf_path, 181, show_matches=True)
 
 #%%
 
@@ -264,7 +267,7 @@ top_page_number = df_result.iloc[0]["page_num"]
 print("Top page number:", top_page_number)
 
 #to see the scoring for the page of choice
-df_result[df_result["page_num"] == 225]
+df_result[df_result["page_num"] == 138]
 #or a range of pages
 df_result[df_result["page_num"].between(61, 67)]
 
