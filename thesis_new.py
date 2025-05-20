@@ -91,10 +91,10 @@ def extract_text_and_score_pages(pdf_path):
         "eu_legislation_hit": eu_hits,
         "eu_penalty": eu_penalty
     })
-    # 40 quite high- at least one in 100 pages has the table on page 27-31
-    #Remove early pages (e.g. first 40) (less likely too appear that early in the text)
+
+    #Remove early pages (e.g. first 25) (less likely too appear that early in the text)
     df = pd.DataFrame(results)
-    df_filtered = df[df["page_num"] >= 40].copy()
+    df_filtered = df[df["page_num"] > 25].copy()
     df_sorted = df_filtered.sort_values("total_score", ascending=False).reset_index(drop=True)
     return df_sorted
 
@@ -152,15 +152,16 @@ def get_expanded_page_range(df, pdf_path, esrs_thresh=5, unique_thresh=4):
             if not row['meets_criteria']:
                 break
 
-            if high_eu_seen:
-                if row['eu_penalty'] > 9:
-                    break  #second page after high-EU has too many EU hits -> stop
-            else:
-                if row['eu_penalty'] < 20:
-                    high_eu_seen = True  #first high-EU page encountered
-
             final_pages.insert(0, i)
             result['in_final_range'] = True
+
+            if high_eu_seen:
+                if row['eu_penalty'] > 9:
+                    break
+            else:
+                if row['eu_penalty'] > 20:
+                    break
+                high_eu_seen = True
         else:
             break
 
@@ -178,15 +179,16 @@ def get_expanded_page_range(df, pdf_path, esrs_thresh=5, unique_thresh=4):
             if not row['meets_criteria']:
                 break
 
+            final_pages.append(i)  
+            result['in_final_range'] = True
+
             if high_eu_seen:
                 if row['eu_penalty'] > 9:
-                    break  #second page after high-EU has too many EU hits -> stop
+                    break  
             else:
-                if row['eu_penalty'] < 20:
-                    high_eu_seen = True  #first high-EU page encountered
-
-            final_pages.append(i)
-            result['in_final_range'] = True
+                if row['eu_penalty'] > 20:
+                    break  
+                high_eu_seen = True
         else:
             break
 
@@ -203,7 +205,7 @@ def get_expanded_page_range(df, pdf_path, esrs_thresh=5, unique_thresh=4):
 # %%
 #RUN only this if you already ran the functions
 #prints the top one candidate page where the table might be located
-pdf_path = "Stellantis-NV-20241231-Annual-Report.pdf"
+pdf_path = "consolidated-annual-report-endesa-2024.pdf"
 df_result = extract_text_and_score_pages(pdf_path)
 top_page_number = df_result.iloc[0]["page_num"]
 print("Top page number:", top_page_number)
@@ -214,8 +216,6 @@ print("Final page range:", result["final_page_range"])
 print(result["assessment_details"][[
     "page", "total_score", "total_esrs", "unique_esrs", "eu_penalty", "meets_criteria", "in_final_range"
 ]])
-
-
 
 
 
@@ -243,7 +243,7 @@ def show_pdf_page_text(pdf_path, page_number, char_limit=None):
         print(f"📄 Content of page {page_number}:\n")
         print(text)
 
-show_pdf_page_text(pdf_path, 272, char_limit=500)
+show_pdf_page_text(pdf_path, 166, char_limit=500)
 #%%
 #to check with eu penalty keywords were detected
 def count_eu_penalty(pdf_path, page_number, show_matches=False):
