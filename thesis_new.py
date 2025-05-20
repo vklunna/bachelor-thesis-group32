@@ -88,7 +88,7 @@ def extract_text_and_score_pages(pdf_path):
         "eu_legislation_hit": eu_hits,
         "eu_penalty": eu_penalty
     })
-
+    # 40 quite high- at least one in 100 pages has the table on page 27-31
     #Remove early pages (e.g. first 40) (less likely too appear that early in the text)
     df = pd.DataFrame(results)
     df_filtered = df[df["page_num"] >= 40].copy()
